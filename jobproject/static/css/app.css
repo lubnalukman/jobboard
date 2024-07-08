@@ -1,0 +1,76 @@
+.list-group-item {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+.list-group-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item h5 {
+    color: #343a40;
+    margin-bottom: 15px;
+}
+
+.list-group-item p {
+    margin: 5px 0;
+}
+
+.list-group-item p strong {
+    color: #1199b7;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input[type="submit"] {
+    background-color: #1199b7;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #0a6d91;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.btn.btn-primary {
+    background-color: #1199b7;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn.btn-primary:hover {
+    background-color: #0a6d91;
+}
+
+.profile-info p {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.profile-info p strong {
+    color: #1199b7;
+}
+.container {
+    margin-bottom: 15px;
+    margin-top: 20px;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Jobs Posted by You</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="{% static 'css/compstyle.css' %}">
+  </head>
+  <body>
+    {% include 'compnavbar.html' %}
+    {% csrf_token %}
+    {% block content %}
+
+      <h2>Your Job Listings</h2>
+  
+      <ul class="list-group">
+        {% for job in jobs %}
+            <li class="list-group-item">
+                <h4>{{ job.title }}</h4>
+                <p><strong>Company:</strong> {{ job.company_name }}</p>
+                <p><strong>Location:</strong> {{ job.location }}</p>
+                <p><strong>Employment Type:</strong> {{ job.get_employment_type_display }}</p>
+                <p><strong>Date Posted:</strong> {{ job.date_posted }}</p>
+                <p><strong>Application Deadline:</strong> {{ job.application_deadline }}</p>
+                <p><strong>Category:</strong> {{ job.category }}</p>
+                <p><strong>Salary:</strong> {{ job.salary }}</p>
+                <p><strong>Qualification:</strong> {{ job.qualification }}</p>
+                <p><strong>Experience Required (Years):</strong> {{ job.experience_years }}</p>
+                <p><strong>Description:</strong> {{ job.description }}</p>
+                <form action="{% url 'delete_job' job.id %}" id="delform" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+                <a href="{% url 'edit_job' job.pk %}" class="btn btn-primary">Edit</a>
+            </li>
+        {% endfor %}
+      </ul>
+
+    {% endblock content %}
+  </body>
+</html>

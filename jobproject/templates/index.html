@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Perfects index Page</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {% load static %}
+    <style>
+        .navbar-custom {
+            background-color: #1199b7;
+        }
+
+        .centered-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            margin-top: 1%;
+            height: 750px;
+            color: white;
+        }
+
+        .search-form {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            margin: 20px 0;
+        }
+
+        .search-form input[type="search"] {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            color: white;
+        }
+
+        .main-content .card {
+            width: 300px; /* Increased width */
+            height: 200px; /* Increased height */
+            text-align: center;
+            margin: 0 20px;
+            background-color: #1199b7;
+            color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease; /* Add transition for hover effect */
+        }
+
+        .main-content .card:hover {
+            transform: scale(1.05); /* Increase size on hover */
+        }
+
+        .main-content .card a {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .main-content .card a:hover {
+            background-color: #14515e; /* Change background color on hover */
+        }
+
+        .container {
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #1199b7;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
+        <a href="/" class="navbar-brand">JOB PERFECTS</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="{% url 'aboutus' %}" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'contactus' %}" class="nav-link">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="centered-form">
+        <div class="main-content">
+            <div class="card">
+                <a href="{% url 'applicantlogin' %}">
+                    ARE YOU A JOB SEEKER
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'companylogin' %}">
+                    ARE YOU AN EMPLOYER
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="background-color: black;height: 375px;width: 1500px; margin-top: 2%; color: white;">
+        <h5>About us</h5>
+        <p>Welcome to Job Perfects!
+            Your Perfect Job Awaits!
+            
+            At Job Perfects, we believe in connecting talented individuals with their dream jobs. Whether you are seeking your first job, looking to make a career change, or aiming to climb the corporate ladder, Job Perfects is here to help you every step of the way.</p>
+        <p> How It Works</p><br>
+            <p>For Job Seekers:
+            
+                Create a Profile - Sign up and create a detailed profile highlighting your skills, experience, and career aspirations.
+                Search and Apply - Browse through job listings and apply to positions that interest you.
+                Get Noticed - Employers can find and contact you directly through our platform.</p><br>
+            
+            <p> For Employers:
+            
+                Post a Job - Create job listings to attract top talent.
+                Search Resumes - Access our database of qualified candidates.
+                Hire the Best - Manage applications and streamline your hiring process with our easy-to-use tools.</p>
+                <p>For more information about us </p><a href="{% url 'aboutus' %}">Click</a>
+    </div>
+
+    <!-- Bootstrap JavaScript libraries -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

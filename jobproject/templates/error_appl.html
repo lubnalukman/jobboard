@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permission Denied</title>
+    <style>
+        .btn.btn-primary {
+            background-color: #1199b7;
+            border-color: #1199b7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .centered-form-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'applnavbar.html' %}
+    <div class="centered-form-container">
+        <h2>YOU DON'T HAVE PERMISSION TO VIEW UNTIL REGISTERED</h2><br>
+        <p>DO YOU WANT TO REGISTER?</p><br>
+        <form action="{% url 'applicantform' %}">
+            <button type="submit" class="btn btn-primary">Register the Applicant</button>
+        </form>
+    </div>
+</body>
+</html>

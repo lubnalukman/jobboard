@@ -1,0 +1,74 @@
+.centered-form-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+.login-form {
+    max-width: 400px; 
+    padding: 25px; 
+    background: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 5px;
+    text-align: center;
+}
+
+.login-form img {
+    width: 350px; /* Adjust the width of the logo */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Add margin below the logo */
+}
+
+.login-form h2 {
+    margin-bottom: 20px; /* Add margin below the login heading */
+}
+
+.login-form .input-group {
+    margin-bottom: 15px; /* Adjust margin between input groups */
+}
+
+.login-form .input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form .input-group input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.login-form button {
+    padding: 10px 20px;
+    background-color: #1199b7;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px; /* Add margin below the login button */
+}
+
+.login-form button:hover {
+    background-color:  #1199b7;
+}
+
+.login-form p {
+    margin-bottom: 10px; /* Adjust margin below the "Don't have an existing account?" message */
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    background-color:  #1199b7;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove default underline */
+    display: inline-block; /* Ensure it's displayed as a block */
+}
+
+.btn-primary:hover {
+    background-color: #1a4b63;
+}

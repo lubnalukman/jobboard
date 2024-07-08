@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Companies and Jobs</title>
+   {% load static %}
+   <link rel="stylesheet" href="{% static 'css/compstyle.css' %}">
+</head>
+<body>
+    {% include 'applnavbar.html' %}
+    <div class="container mt-5">
+        <form class="form-inline search-form" method="get" action="{% url 'searchjobs' %}">
+            <input class="form-control" type="search" placeholder="Search category, title, or company name" aria-label="Search" name="q">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="container mt-5">
+        <h2>Companies and their Job Listings</h2>
+        {% for entry in companies_jobs %}
+            <div class="company-details mb-4">
+                <h3>{{ entry.company.name }}</h3>
+                <p>{{ entry.company.info }}</p>
+                <p>Email: {{ entry.company.email }}</p>
+                <p>Location: {{ entry.company.location }}</p>
+                <p>Website: <a href="{{ entry.company.website }}">{{ entry.company.website }}</a></p>
+                <p>Type: {{ entry.company.type }}</p>
+                <p>Number of Openings: {{ entry.jobs|length }}</p>
+                <a href="{% url 'view_jobs' entry.company.id %}" class="btn btn-primary">View Openings</a>
+            </div>
+        {% endfor %}
+    </div>
+    </body>
+</body>
+</html>

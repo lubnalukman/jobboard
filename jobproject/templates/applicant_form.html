@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    {% load static %}
+    <title>Applicant Registration Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/form.css'%}"> </link>
+    <script src="{% static 'js/form.js' %}"></script>
+    <style>
+        .btn-primary {
+    padding: 10px 20px;
+    background-color:  #1199b7;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove default underline */
+    display: inline-block; /* Ensure it's displayed as a block */
+}
+
+.btn-primary:hover {
+    background-color: #1a4b63;
+}
+    </style>
+</head>
+
+<body>
+    {% include 'applnavbar.html' %}
+   
+    <div class="container">
+        <h2>Applicant Form</h2>
+        <form id="Form" method="post" enctype="multipart/form-data">
+            
+            <div class="form-group">
+                {% csrf_token %}
+                {{ form.as_p }}
+            
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    {% if already_submitted %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        alert('You have already registered');
+        window.location.href = "{% url 'applicanthome' %}";
+    });
+</script>
+{% endif %}
+   
+    
+    
+</body>
+
+</html>

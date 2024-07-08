@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>POST A JOB</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/applyjob.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='main.js'></script>
+    <style>
+        .btn.btn-primary {
+    background-color: #1199b7;
+    border-color: #1199b7;
+    }
+    </style>
+</head>
+<body>
+   
+    {% block content %}
+    {% include "compnavbar.html" %}
+
+    <div class="container mt-5">
+        <div class="col-md-6">
+            <h2>POST A JOB</h2>
+            <form method="post" id="Form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {{ msg }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('Form').addEventListener('submit', function(event) {
+                alert('Application submitted successfully');  
+            });
+        });
+    </script>
+
+    {% endblock content %}
+</body>
+</html>

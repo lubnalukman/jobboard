@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Listings</title>
+    {% load static %}
+    <style rel="stylesheet" href="{% static 'css/home.css' %}"></style>
+    <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/comp.css' %}">
+</head>
+<body>
+   {% include 'applnavbar.html' %} 
+   
+    {%block content%}
+    <div class="container mt-5">
+    <h2>Job Listings</h2>
+    <ul class="list-group">
+        {% for job in jobs %}
+            <li class="list-group-item">
+                <h4>{{ job.title }}</h4>
+                <p><strong>Company:</strong> {{ job.company_name }}</p>
+                <p><strong>Location:</strong> {{ job.location }}</p>
+                <p><strong>Employment Type:</strong> {{ job.get_employment_type_display }}</p>
+                <p><strong>Date Posted:</strong> {{ job.date_posted }}</p>
+                <p><strong>Application Deadline:</strong> {{ job.application_deadline }}</p>
+                <p><strong>Category:</strong> {{ job.category }}</p>
+                <p><strong>Salary:</strong> {{ job.salary }}</p>
+                <p><strong>Qualification:</strong> {{ job.qualification }}</p>
+                <p><strong>Experience Required (Years):</strong> {{ job.experience_years }}</p>
+                <p><strong>Description:</strong> {{ job.description }}</p>
+                <h4>Do you want to apply?</h4>
+                <form action="{% url 'applyjob' %}" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Upload your CV</button>
+                </form>
+                    
+                {% if job.creator == request.user %}
+                <form action="{% url 'delete_job' job.id %}" id="delform" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit">Delete</button>
+                </form>
+                    <a href="{% url 'edit_job' job.pk %}">Edit</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+  </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById('delform').addEventListener('submit', function(event) 
+          {
+            alert('job deleted successfully');  
+          });
+      });
+    </script>
+    {%endblock content%}
+</body>
+</html>

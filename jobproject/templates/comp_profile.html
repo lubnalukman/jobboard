@@ -1,0 +1,34 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <script src="{% static 'js/script1.js' %}"></script>
+</head>
+<body>
+    {% include "compnavbar.html" %}
+    <div class="container">
+        <h1>Your Profile</h1>
+        <form method="post" enctype="multipart/form-data" id="Form">
+            {% csrf_token %}
+            {% if editable %}
+                {{ form.as_p }}
+                <div class="form-group">
+                    <input type="submit" value="Save">
+                </div>
+            {% else %}
+                <p>Name: {{ form.instance.name }}</p>
+                <p>Company Details: {{ form.instance.info }}</p>
+                <p>Email: {{ form.instance.email }}</p>
+                <p>Location: {{ form.instance.location }}</p>
+                <p>Website: {{ form.instance.website }}</p>
+                <p>Company type: {{ form.instance.get_type_display }}</p>
+                <p><a href="?edit=true">Edit Profile</a></p>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
+

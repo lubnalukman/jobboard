@@ -1,0 +1,23 @@
+<!-- edit_job.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Job</title>
+    {% load static %}
+    <script src="{% static 'js/form.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/editjob.css' %}"> 
+</head>
+<body>
+    {% include "compnavbar.html" %}
+    <div class="container">
+        
+    
+    <h1>Edit Job: {{ form.instance.title }}</h1>
+    <form method="post" enctype="multipart/form-data" id="EditForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+</body>
+</html>

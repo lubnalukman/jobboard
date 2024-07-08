@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{% static 'css/compstyle.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="{% static 'js/form.js' %}"></script>
+</head>
+
+<body>
+    {% include "compnavbar.html" %}
+    
+<div class="container mt-5">
+    <h2>Search Results</h2>
+    {% if Applicants %}
+        <ul class="list-group">
+            {% for applicant in Applicants %}
+                <li class="list-group-item">
+                    <p><strong>Name:</strong> {{ applicant.name }}</p>
+                    <p><strong>Age:</strong> {{ applicant.age }}</p>
+                    <p><strong>Gender:</strong> {{ applicant.get_gender_display }}</p>
+                    <p><strong>Phone:</strong> {{ applicant.phone_number }}</p>
+                    <p><strong>Qualification:</strong> {{ applicant.qualification }}</p>
+                    <p><strong>Year Of Experience:</strong> {{ applicant.year_of_experience }}</p>
+                    <p><strong>Location:</strong> {{ applicant.location }}</p>
+                    <p><strong>Preferred Job:</strong>{{applicant.job_title}}</p>
+                    <p><strong>Resume:</strong>
+                         {% if applicant.resume %}
+                        <a href="{{ applicant.resume.url }}">Download Resume</a>
+                        {% endif %}</p>
+                    <h5>Do you want to contact {{ applicant.name }}?</h5>
+                    <form action="" method="post" enctype="multipart/form-data" id="mailform">
+                        {% csrf_token %}
+                        <input type="hidden" name="applicant_id" value="{{ applicant.id }}">
+                        <button type="submit" class="btn btn-primary">Send mail</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No applicants found matching your search criteria.</p>
+    {% endif %}
+</div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

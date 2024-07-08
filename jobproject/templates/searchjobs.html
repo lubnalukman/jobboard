@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/compstyle.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   <style>
+    .btn.btn-primary {
+        background-color: #1199b7;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    .navbar-custom {
+    background-color: #1199b7;
+}
+   </style>
+</head>
+
+<body>
+    {% include 'applnavbar.html' %}
+    <div class="container mt-5">
+        <h2>Search Results</h2>
+        {% if job_listings %}
+            <ul class="list-group">
+                {% for job in job_listings %}
+                    <li class="list-group-item">
+                        <h4 style="text-align: center;"><u><b>{{ job.title }}</b></u></h4>
+                        <p><strong>Company:</strong> {{ job.company_name }}</p>
+                        <p><strong>Company Info:</strong> {{ job.company_info }}</p>
+                        <p><strong>Description:</strong> {{ job.description }}</p>
+                        <p><strong>Location:</strong> {{ job.location }}</p>
+                        <p><strong>Employment Type:</strong> {{ job.get_employment_type_display }}</p>
+                        <p><strong>Date Posted:</strong> {{ job.date_posted }}</p>
+                        <p><strong>Application Deadline:</strong> {{ job.application_deadline }}</p>
+                        <p><strong>Number of Vacancies:</strong> {{ job.no_of_vacancy }}</p>
+                        <p><strong>Category:</strong> {{ job.category }}</p>
+                        <p><strong>Salary:</strong> {{ job.salary }}</p>
+                        <p><strong>Qualification:</strong> {{ job.qualification }}</p>
+                        <p><strong>Experience Required:</strong> {{ job.experience_years }} years</p>
+                    
+                    <h5 >Apply for {{ job.title }}</h5>
+                    <form action="{% url 'applyjob' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                    </form>
+                    </b<>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No jobs found matching your search criteria.</p>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

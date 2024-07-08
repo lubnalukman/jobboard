@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobPerfects</title>
+    <style>
+        .btn.btn-primary {
+    background-color: #1199b7;
+    border-color: #1199b7;
+    }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/homestyle.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="bs-example">
+        <div class="navbar navbar-expand-md navbar-dark navbar-custom">
+            <a href="/" class="navbar-brand">JOB PERFECTS</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="{% url 'applicantform' %}" class="nav-item nav-link">REGISTRATION</a>
+                    <a href="{% url 'applicantprofile' %}" class="nav-item nav-link">PROFILE</a>
+                    <a href="{% url 'companiesjobs' %}" class="nav-item nav-link">JOBS</a>
+                    <a href="{% url 'Logout' %}" class="nav-item nav-link">LOGOUT</a>
+                </div>
+                <div class="navbar-nav">
+                    <a href="/aboutus" class="nav-item nav-link">About Us</a>
+                    <a href="/contactus" class="nav-item nav-link">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class=" container centered-form">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <form method="get" action="{% url 'searchjobs' %}" class="form-inline search-form">
+                <input class="form-control" type="search" placeholder="Search category, title,location or company name" aria-label="Search" name="q">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+       
+       <div class="container mt-5">
+            {% if applicant and applicant.job_title %}
+                <ul class="list-group">
+                    {% for job in jobs %}
+                        
+                            <li class="list-group-item {% if job.title == applicant.job_title and job.location == applicant.location %}matching-job{% endif %}">
+                                <h4><u>{{ job.title }}</u></h4>
+                                <p><strong>Company:</strong> {{ job.company_name }}</p>
+                                <p><strong>Location:</strong> {{ job.location }}</p>
+                                <p><strong>Employment Type:</strong> {{ job.get_employment_type_display }}</p>
+                                <p><strong>Date Posted:</strong> {{ job.date_posted }}</p>
+                                <p><strong>Application Deadline:</strong> {{ job.application_deadline }}</p>
+                                <p><strong>Category:</strong> {{ job.category }}</p>
+                                <p><strong>Salary:</strong> {{ job.salary }}</p>
+                                <p><strong>Qualification:</strong> {{ job.qualification }}</p>
+                                <p><strong>Experience Required (Years):</strong> {{ job.experience_years }}</p>
+                                <p><strong>Description:</strong> {{ job.description }}</p>
+                                <h4>Do you want to apply?</h4>
+                                <form action="{% url 'applyjob' %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary" type="submit">Upload your CV</button>
+                                </form>
+                            </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>  </p>
+                <ul class="list-group">
+                    {% for job in jobs %}
+                        <li class="list-group-item">
+                            <h4>{{ job.title }}</h4>
+                            <p><strong>Company:</strong> {{ job.company_name }}</p>
+                            <p><strong>Location:</strong> {{ job.location }}</p>
+                            <p><strong>Employment Type:</strong> {{ job.get_employment_type_display }}</p>
+                            <p><strong>Date Posted:</strong> {{ job.date_posted }}</p>
+                            <p><strong>Application Deadline:</strong> {{ job.application_deadline }}</p>
+                            <p><strong>Category:</strong> {{ job.category }}</p>
+                            <p><strong>Salary:</strong> {{ job.salary }}</p>
+                            <p><strong>Qualification:</strong> {{ job.qualification }}</p>
+                            <p><strong>Experience Required (Years):</strong> {{ job.experience_years }}</p>
+                            <p><strong>Description:</strong> {{ job.description }}</p>
+                            <h4>Do you want to apply?</h4>
+                            <form action="{% url 'applyjob' %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <button class="btn btn-primary" type="submit">Upload your CV</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            </div>
+        </div></div>
+    </body></html>    
+        
+           

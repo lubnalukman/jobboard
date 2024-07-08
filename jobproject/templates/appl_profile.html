@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Applicant Profile</title>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/script1.js' %}"></script>
+</head>
+
+<body>
+    {% include 'applnavbar.html' %}
+    <div class="container">
+        <h1>Your Profile</h1>
+        <form method="post" enctype="multipart/form-data" id="Form">
+            {% csrf_token %}
+            <div class="profile-info">
+                {% if editable %}
+                    <div class="form-group">
+                        {{ form.as_p }}
+                    </div>
+                    <div class="form-group">
+        
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary">
+                    </div>
+                {% else %}
+                    <p><strong>Name:</strong> {{ form.instance.name }}</p>
+                    <p><strong>Age:</strong> {{ form.instance.age }}</p>
+                    <p><strong>Gender:</strong> {{ form.instance.get_gender_display }}</p>
+                    <p><strong>Phone Number:</strong> {{ form.instance.phone_number }}</p>
+                    <p><strong>Qualification:</strong> {{ form.instance.qualification }}</p>
+                    <p><strong>Years of Experience:</strong> {{ form.instance.year_of_experience }}</p>
+                    <p><strong>Location:</strong> {{ form.instance.location }}</p>
+                    <p><strong>Preferred Job:</strong>{{form.instance.job_title}}</p>
+                    {% if form.instance.resume %}
+                        <p><strong>Resume:</strong> <a href="{{ form.instance.resume.url }}">Download Resume</a></p>
+                    {% endif %}
+                    <p><a href="?edit=true" class="btn btn-primary">Edit Profile</a></p>
+                {% endif %}
+            </strong<>
+        </form>
+    </div>
+</body>
+
+</html>

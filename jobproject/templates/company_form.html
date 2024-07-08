@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Company</title>
+    {% load static %} 
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/form.css'%}"> </link>
+    <script src="{% static 'js/form.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+   
+    {% include "compnavbar.html" %}
+    <div class="container centered-form">
+        <div class="col-md-6">
+            <h2>Register your Company</h2> 
+            <form id="Form" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+    {% if already_submitted %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        alert('You have already registered');
+        window.location.href = "{% url 'companyhome' %}";
+    });
+</script>
+{% endif %}
+   
+</body>
+</html>

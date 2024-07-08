@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Applicants</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* styles.css */
+
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #1199b7;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.table thead th {
+    background-color: #1199b7;
+    color: #ffffff;
+    text-align: center;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.form-control {
+    width: auto;
+    display: inline-block;
+}
+
+.btn-submit {
+    background-color: #1199b7;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0a6d91;
+}
+
+
+    </style>
+</head>
+<body>
+    {% include "compnavbar.html" %}
+    <div class="container mt-5">
+        <h1>Applicants for {{ company.name }}</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Applicant</th>
+                    <th>Job Title</th>
+                    <th>Status</th>
+                    <th>Applied Date</th>
+                    <th>Resume</th>
+                    <th>Cover Letter</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                {% for applicant in applicants %}
+                    <tr>
+                        <td>{{ applicant.applicant }}</td>
+                        <td>{{ applicant.jobs.title }}</td>
+                        <td>
+                            <form method="post" action="">
+                                {% csrf_token %}
+                                <select name="application_status" class="form-control">
+                                    <option value="Pending" {% if applicant.application_status == "Pending" %}selected{% endif %}>Pending</option>
+                                    <option value="Accepted" {% if applicant.application_status == "Accepted" %}selected{% endif %}>Accepted</option>
+                                    <option value="Rejected" {% if applicant.application_status == "Rejected" %}selected{% endif %}>Rejected</option>
+                                </select>
+                        </td>
+                        <td>{{ applicant.applied_date }}</td>
+                        <td><a href="{{ applicant.resume.url }}" class="btn-submit">View Resume</a></td>
+                        <td><a href="{{ applicant.cover_letter.url }}" class="btn-submit">View Cover Letter</a></td>
+                        <td>
+                            </form>
+                        </a<>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JavaScript libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
