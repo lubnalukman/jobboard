@@ -1,10 +1,37 @@
-# Ignore Python compiled files
+
+# Python compiled files
 __pycache__/
 *.pyc
 
-# Ignore virtual environments
+# Virtual environments
 venv/
+env/
 
-# Ignore dependency directories
+# Dependency directories
 node_modules/
+bower_components/
+
+# Database files
+*.sqlite3
+*.db
+
+# Configuration files
+.env
+
+# Logs
+*.log
+
+# IDE settings
+.vscode/
+.idea/
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Coverage reports
+coverage/
+*.cover
 
