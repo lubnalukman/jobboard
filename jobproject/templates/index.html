@@ -13,6 +13,14 @@
             background-color: #1199b7;
         }
 
+        body {
+            background-image: url("{% static 'images/bgimage.jpg' %}");
+            background-size: cover; /* Make sure the image covers the entire background */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background from repeating */
+            height: 140vh; /* Make sure the background covers the full height of the viewport */
+            color: white; /* Set default text color to white */
+        }
         .centered-form {
             display: flex;
             flex-direction: column;
@@ -94,16 +102,6 @@
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="{% url 'aboutus' %}" class="nav-link">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'contactus' %}" class="nav-link">Contact Us</a>
-                </li>
-            </ul>
-        </div>
     </nav>
 
     <div class="centered-form">
@@ -139,7 +137,7 @@
                 Post a Job - Create job listings to attract top talent.
                 Search Resumes - Access our database of qualified candidates.
                 Hire the Best - Manage applications and streamline your hiring process with our easy-to-use tools.</p>
-                <p>For more information about us </p><a href="{% url 'aboutus' %}">Click</a>
+                <p>For more information about us please login and see aboutus in the navbar</p>
     </div>
 
     <!-- Bootstrap JavaScript libraries -->

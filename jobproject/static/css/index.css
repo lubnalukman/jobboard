@@ -1,0 +1,25 @@
+/* Adjust the height of centered form for smaller screens */
+@media (max-width: 768px) {
+    .centered-form {
+        height: auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .main-content {
+        flex-direction: column;
+    }
+
+    .main-content .card {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+}
+
+/* Adjust container for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 20px;
+    }
+}

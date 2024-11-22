@@ -2,68 +2,69 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>title</title>
+    <title>Company Login Page</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        .navbar-custom {
-           background-color: #1199b7;
-       }
-       .btn-primary {
-       background-color: #1199b7;
-       border-color: #1199b7;
-       color: #ffffff;
-       border-radius: 5px;
-       padding: 10px 20px;
-       cursor: pointer;
-   }
-   </style>
+      .navbar-custom {
+        background-color: #1199b7;
+      }
+      .btn-primary {
+        background-color: #1199b7;
+        border-color: #1199b7;
+        color: #ffffff;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     {% if messages %}
     <script>
-        {% for message in messages %}
-            alert("{{ message }}");
-        {% endfor %}
+      {% for message in messages %}
+        alert("{{ message }}");
+      {% endfor %}
     </script>
     {% endif %}
     <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
-        <a href="/" class="navbar-brand">JOB PERFECTS</a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto"> <!-- Changed ml-auto to mr-auto to align left -->
-                <li class="nav-item">
-                    <a href="{% url 'index' %}" class="nav-link">HOME</a>
-                </li>
-                
-            </ul>
-        </div>
+      <a href="/" class="navbar-brand">JOB PERFECTS</a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="{% url 'index' %}" class="nav-link">HOME</a>
+          </li>
+        </ul>
+      </div>
     </nav>
     <div class="centered-form-container">
-        <div class="login-form">
-            <html src="{% static '/images/logo2.png' %}" alt="Company Logo">
-            <form method="post" action="">
-                {% csrf_token %}
-                <h2>Login</h2>
-                <div class="input-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit">Login</button>
-                <p>Don't have an existing account?</p><br >
-                   <a href="{% url 'sign_up' %}" class="btn btn-primary">Signup</a>
-                 <p>Forgot Password?</p>   
-                   <a href="{% url 'reset' %}" class="btn btn-primary">Reset Password</a>
-           
-            </form>
-        </div>
+      <div class="login-form">
+        <img src="{% static 'images/logo2.png' %}" alt="Company Logo">
+        <form method="post" action="{% url 'companylogin' %}">
+          {% csrf_token %}
+          <h2>Login</h2>
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <p>Don't have an existing account?</p>
+          <a href="{% url 'sign_up' %}" class="btn btn-primary">Signup</a>
+          <p>Forgot Password?</p>
+          <a href="{% url 'reset' %}" class="btn btn-primary">Reset Password</a>
+        </form>
+      </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>
