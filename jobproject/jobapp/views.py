@@ -15,7 +15,8 @@ from django.urls import reverse_lazy,reverse
 from django.views.generic.edit import UpdateView
 from django.db.models import Q
 from django.templatetags.static import static
-
+from django.core.mail.message import EmailMessage
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def index(request):
@@ -99,6 +100,10 @@ def applicant_home(request):
     jobs = list(matching_jobs) + list(other_jobs)
     return render(request, 'applicant_home.html', {'jobs': jobs, 'applicant': applicant})
 
+def job_details(request, id):
+    job = get_object_or_404(Job, id=id)
+    return render(request, 'jobdetails.html', {'job': job})
+
 def company_home(request):
     jobs = Job.objects.filter(creator=request.user)
     matching_applicants = Applicant.objects.none()
@@ -125,16 +130,19 @@ def company_home(request):
         applicant_id = request.POST.get('applicant_id')
         applicant = Applicant.objects.get(id=applicant_id)
         
-        # Sending the email
         send_mail(
             'Job Opportunity',
-            f'Hi {applicant.name},\n\nWe are interested in your profile for the {applicant.job_title} position at {company.name}. Please contact us for further discussion.\n\nBest regards,\nYour Company',
+            f'Hi {applicant.name},\n\nWe are interested in your profile for the {applicant.job_title} position at {company.name}. Please we will contact u for further discussion.\n\nBest regards,\nYour Company',
             settings.DEFAULT_FROM_EMAIL,
             [applicant.user.email],
             fail_silently=False,
         )
         return redirect('companyhome')
     return render(request, 'company_home.html', context)
+
+def applicant_details(request, id):
+    applicant = get_object_or_404(Applicant, id=id)
+    return render(request, 'applicantdetails.html', {'applicant': applicant})
 
 
 def applicant_form_view(request):
@@ -250,19 +258,35 @@ class JobUpdateView(UpdateView):
             return HttpResponseForbidden()
         return super().form_valid(form)
 
-def applyjob_view(request):
+def applyjob_view(request, job_id): 
+    job = get_object_or_404(Job, id=job_id) 
+    applicant_user = request.user  
+    try:
+        applicant = Applicant.objects.get(user=applicant_user)
+    except Applicant.DoesNotExist:
+        return redirect('applicantform')  
+
     if request.method == 'POST':
         form = ApplicantTrackingForm(request.POST, request.FILES)
         if form.is_valid():
-            application=form.save()
-            company = application.company
-            job = application.jobs
-            applicant = application.applicant
-            send_application_notification_email(company, job,applicant)
+            application = form.save(commit=False)
+            application.jobs = job  
+            application.company = job.company_name 
+            application.applicant = applicant  
+            application.application_status = 'Pending' 
+            application.save()
+
+            send_application_notification_email(
+                company=application.company, 
+                job=application.jobs, 
+                applicant=application.applicant
+            )
+
             return redirect('joblist')  
     else:
         form = ApplicantTrackingForm()
-    return render(request, 'apply_job.html', {'form': form}) 
+
+    return render(request, 'apply_job.html', {'form': form})
 
 def send_application_notification_email(company, job,applicant):
     subject = f'New Job Application for {job.title} at {company.name}'
@@ -275,8 +299,26 @@ def send_application_notification_email(company, job,applicant):
     )
     from_email = 'demoidlubi@gmail.com'  
     to_email = company.user.email  
-    send_mail(subject,message,from_email, [to_email])
+    try:
+        email = EmailMessage(subject, message, from_email, [to_email])
+        if applicant.resume:
+            email.attach(applicant.resume.name, applicant.resume.read(), applicant.resume.content_type)
+        if applicant.cover_letter:
+            email.attach(applicant.cover_letter.name, applicant.cover_letter.read(), applicant.cover_letter.content_type)
+        
+        email.send(fail_silently=False)  
 
+    except Exception as e:
+        print(f"Error sending email: {str(e)}")
+
+def applicant_jobs_view(request):
+    try:
+        applicant = Applicant.objects.get(user=request.user)
+    except ObjectDoesNotExist:
+        return redirect('errorappl')  
+    applied_jobs = ApplicantTracking.objects.filter(applicant=applicant).select_related('jobs', 'company')
+
+    return render(request, 'appliedjobs.html', {'applied_jobs': applied_jobs})
 
 def company_form_view(request):
     already_submitted = Company.objects.filter(user=request.user).exists()
@@ -300,9 +342,42 @@ def view_applicants(request):
         company = Company.objects.get(user=request.user)
     except Company.DoesNotExist:
         messages.error(request, "You do not have permission to view these applicants.")
-        return redirect('errorcomp') 
+        return redirect('errorcomp')
+
+    if request.method == "POST":
+        applicant_id = request.POST.get('applicant_id')
+        new_status = request.POST.get('application_status')
+        send_email = request.POST.get('send_email') == "true"
+        try:
+            application = ApplicantTracking.objects.get(id=applicant_id, company=company)
+            application.application_status = new_status
+            application.save()
+            if send_email:
+                subject = f"Application Status Update for {application.jobs.title}"
+                message = (
+                    f"Dear {application.applicant.name},\n\n"
+                    f"Your application for the position of {application.jobs.title} at {company.name} has been updated.\n"
+                    f"New Status: {new_status}\n\n"
+                    f"Thank you for applying with us.\n\n"
+                    f"more details will be send later"
+                    f"Best regards,\n{company.name} Team"
+                   
+                )
+                from_email = "demoidlubi@gmail.com"
+                to_email = application.applicant.user.email
+                send_mail(subject, message, from_email, [to_email])
+
+                messages.success(request, f"Status updated and email sent to {application.applicant.name}.")
+            else:
+                messages.success(request, f"Status updated for {application.applicant.name}.")
+        except ApplicantTracking.DoesNotExist:
+            messages.error(request, "Application not found or you don't have permission to update this application.")
+
+        return redirect('viewapplicants')
+
     applicants = ApplicantTracking.objects.filter(company=company)
     return render(request, 'view_applicants.html', {'company': company, 'applicants': applicants})
+
 
 def companies_with_jobs(request):
     companies = Company.objects.all()
@@ -380,29 +455,6 @@ def errorcomp_view(request):
 def errorappl_view(request):
     return render(request,'error_appl.html')
 
-def aboutus_view(request):
-    return render(request,'aboutus.html')
-
-def contactus_view(request):
-    sub = forms.ContactusForm()
-    if request.method == 'POST':
-        sub = forms.ContactusForm(request.POST)
-        if sub.is_valid():
-            email = sub.cleaned_data['Email']
-            name = sub.cleaned_data['Name']
-            message = sub.cleaned_data['Message']
-            send_mail(
-                subject=f'{name} || {email}',
-                message=message,
-                from_email=request.user.email,
-                recipient_list=[settings.EMAIL_HOST_USER],
-                fail_silently=False
-            )
-            return redirect('index') 
-        else:
-            return render(request, 'contactus.html', {'form': sub, 'success': False})
-    return render(request, 'contactus.html', {'form': sub})
-
 def resetPassword(request):
     if request.method == "POST":
         uname = request.POST.get('uname')
@@ -422,3 +474,49 @@ def resetPassword(request):
         else:
             return render(request, "ResetPassword.html", {"errmsg": "Please provide both username and password"})
     return render(request, "ResetPassword.html")
+
+def aboutus_view1(request):
+    return render(request,'aboutus1.html')
+
+def contactus_view1(request):
+    sub = forms.ContactusForm()
+    if request.method == 'POST':
+        sub = forms.ContactusForm(request.POST)
+        if sub.is_valid():
+            email = sub.cleaned_data['Email']
+            name = sub.cleaned_data['Name']
+            message = sub.cleaned_data['Message']
+            send_mail(
+                subject=f'{name} || {email}',
+                message=message,
+                from_email=request.user.email,
+                recipient_list=[settings.EMAIL_HOST_USER],
+                fail_silently=False
+            )
+            return redirect('applicanthome') 
+        else:
+            return render(request, 'contactus1.html', {'form': sub, 'success': False})
+    return render(request, 'contactus1.html', {'form': sub})
+
+def aboutus_view2(request):
+    return render(request,'aboutus2.html')
+
+def contactus_view2(request):
+    sub = forms.ContactusForm()
+    if request.method == 'POST':
+        sub = forms.ContactusForm(request.POST)
+        if sub.is_valid():
+            email = sub.cleaned_data['Email']
+            name = sub.cleaned_data['Name']
+            message = sub.cleaned_data['Message']
+            send_mail(
+                subject=f'{name} || {email}',
+                message=message,
+                from_email=request.user.email,
+                recipient_list=[settings.EMAIL_HOST_USER],
+                fail_silently=False
+            )
+            return redirect('companyhome') 
+        else:
+            return render(request, 'contactus2.html', {'form': sub, 'success': False})
+    return render(request, 'contactus2.html', {'form': sub})

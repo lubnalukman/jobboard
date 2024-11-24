@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applicant Details</title>
+    {% load static %} 
+    <meta charset="utf-8">
+    <script src="{% static 'js/form.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/homestyles.css' %}">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- jQuery, Popper.js, Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="{% static 'js/form.js' %}"></script>
+</head>
+<body>
+   
+    {% include "compnavbar.html" %}
+            <li class="list-group-item">
+                <h4>{{ applicant.name }}</h4>
+                <p><strong>Age:</strong> {{ applicant.age }}</p>
+                <p><strong>Gender:</strong> {{ applicant.get_gender_display }}</p>
+                <p><strong>Phone Number:</strong> {{ applicant.phone_number }}</p>
+                <p><strong>Qualification:</strong> {{ applicant.qualification }}</p>
+                <p><strong>Years of Experience:</strong> {{ applicant.year_of_experience }}</p>
+                <p><strong>Location:</strong> {{ form.instance.location }}</p>
+                <p><strong>Job Preferred:</strong> {{ applicant.job_title }}</p>
+                {% if applicant.resume %}
+                    <p><strong>Resume:</strong> <a href="{{ applicant.resume.url }}" target="_blank">Download</a></p>
+                {% endif %}
+                <h5>Do you want to contact {{ applicant.name }}?</h5>
+            <form action="" method="post" enctype="multipart/form-data" id="mailform">
+                {% csrf_token %}
+                <input type="hidden" name="applicant_id" value="{{ applicant.id }}">
+                <button type="submit" class="btn btn-primary">Send mail</button>
+            </form>
+            </li>
+      
+   

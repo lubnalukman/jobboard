@@ -11,6 +11,14 @@
         .navbar-custom {
     background-color: #1199b7;
 }
+body {
+            background-image: url("{% static 'images/bgimage1.jpg' %}");
+            background-size: cover; /* Make sure the image covers the entire background */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background from repeating */
+            height: 200vh; /* Make sure the background covers the full height of the viewport */
+            color: black; /* Set default text color to white */
+        }
     </style>
 </head>
 <body>
@@ -23,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto"> <!-- Changed ml-auto to mr-auto to align left -->
                     <li class="nav-item">
-                        <a href="{% url 'index' %}" class="nav-link">HOME</a>
+                        <a href="{% url 'applicanthome' %}" class="nav-link">HOME</a>
                     </li>
                     
                 </ul>
@@ -63,7 +71,7 @@
         </ul>
         <p class="text-center"><a href="{%url 'sign_up' %}" class="btn btn-primary">Join Job Perfects Today!</a></p>
         <p>Embark on your journey to career success with Job Perfects. Sign up now to start finding the job that is perfect for you.</p>
-        <p>Back to home page</p> <a href="{% url 'index' %}"></a>
+        <p>Back to home page</p> <a href="{% url 'applicanthome' %}"></a>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

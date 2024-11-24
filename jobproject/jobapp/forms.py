@@ -13,7 +13,6 @@ class ApplicantForm(forms.ModelForm):
     class Meta:
         model = Applicant
         fields = [
-            'user',
             'name', 'age', 'gender', 'phone_number', 
             'qualification', 'year_of_experience','job_title','location','resume'
         ]
@@ -41,7 +40,7 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = [
-            'creator','company_name','company_info','title','description','location','employment_type','application_deadline','category','salary','qualification','experience_years','no_of_vacancy'
+            'company_info','title','description','location','employment_type','application_deadline','category','salary','qualification','experience_years','no_of_vacancy'
         ]
         widgets = {
             'application_deadline': forms.DateInput(attrs={'type': 'date'}),
@@ -60,18 +59,14 @@ class CompanyForm(forms.ModelForm):
     info = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 10,'cols':10}))  # Adjust rows as needed
     class Meta:
         model = Company
-        fields = ['user','name', 'info', 'email', 'location', 'website', 'type']
+        fields = ['name', 'info', 'email', 'location', 'website', 'type']
 
 
 class ApplicantTrackingForm(forms.ModelForm):
     class Meta:
         model = ApplicantTracking
-        fields = ['company', 'jobs', 'applicant', 'application_status', 'resume', 'cover_letter']
-        widgets = {
-            'application_status': forms.Select(choices=ApplicantTracking.STATUS_CHOICES),
-
-        }
-        
+        fields = ['resume', 'cover_letter']
+    
 
 class ContactusForm(forms.Form):
     Name = forms.CharField(max_length=30)

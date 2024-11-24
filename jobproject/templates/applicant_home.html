@@ -13,7 +13,8 @@
     border-color: #1199b7;
     }
     </style>
-    <link rel="stylesheet" href="{% static 'css/homestyle.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/homestyles.css' %}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,12 +36,13 @@
                 <div class="navbar-nav">
                     <a href="{% url 'applicantform' %}" class="nav-item nav-link">REGISTRATION</a>
                     <a href="{% url 'applicantprofile' %}" class="nav-item nav-link">PROFILE</a>
-                    <a href="{% url 'companiesjobs' %}" class="nav-item nav-link">JOBS</a>
+                    <a href="{% url 'companiesjobs' %}" class="nav-item nav-link">COMPANIES</a>
+                    <a href="{% url 'appliedjobs' %}" class="nav-item nav-link">JOBS</a>
                     <a href="{% url 'Logout' %}" class="nav-item nav-link">LOGOUT</a>
                 </div>
                 <div class="navbar-nav">
-                    <a href="/aboutus" class="nav-item nav-link">About Us</a>
-                    <a href="/contactus" class="nav-item nav-link">Contact Us</a>
+                    <a href="{% url 'aboutus1' %}" class="nav-item nav-link">About Us</a>
+                    <a href="{% url 'contactus1' %}" class="nav-item nav-link">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -65,19 +67,7 @@
                                 <h4><u>{{ job.title }}</u></h4>
                                 <p><strong>Company:</strong> {{ job.company_name }}</p>
                                 <p><strong>Location:</strong> {{ job.location }}</p>
-                                <p><strong>Employment Type:</strong> {{ job.get_employment_type_display }}</p>
-                                <p><strong>Date Posted:</strong> {{ job.date_posted }}</p>
-                                <p><strong>Application Deadline:</strong> {{ job.application_deadline }}</p>
-                                <p><strong>Category:</strong> {{ job.category }}</p>
-                                <p><strong>Salary:</strong> {{ job.salary }}</p>
-                                <p><strong>Qualification:</strong> {{ job.qualification }}</p>
-                                <p><strong>Experience Required (Years):</strong> {{ job.experience_years }}</p>
-                                <p><strong>Description:</strong> {{ job.description }}</p>
-                                <h4>Do you want to apply?</h4>
-                                <form action="{% url 'applyjob' %}" method="post" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    <button class="btn btn-primary" type="submit">Upload your CV</button>
-                                </form>
+                                <a href="{% url 'job_details' job.id %}" class="btn btn-primary">View Job</a>
                             </li>
                     {% endfor %}
                 </ul>
@@ -89,19 +79,7 @@
                             <h4>{{ job.title }}</h4>
                             <p><strong>Company:</strong> {{ job.company_name }}</p>
                             <p><strong>Location:</strong> {{ job.location }}</p>
-                            <p><strong>Employment Type:</strong> {{ job.get_employment_type_display }}</p>
-                            <p><strong>Date Posted:</strong> {{ job.date_posted }}</p>
-                            <p><strong>Application Deadline:</strong> {{ job.application_deadline }}</p>
-                            <p><strong>Category:</strong> {{ job.category }}</p>
-                            <p><strong>Salary:</strong> {{ job.salary }}</p>
-                            <p><strong>Qualification:</strong> {{ job.qualification }}</p>
-                            <p><strong>Experience Required (Years):</strong> {{ job.experience_years }}</p>
-                            <p><strong>Description:</strong> {{ job.description }}</p>
-                            <h4>Do you want to apply?</h4>
-                            <form action="{% url 'applyjob' %}" method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <button class="btn btn-primary" type="submit">Upload your CV</button>
-                            </form>
+                            <a href="{% url 'job_details' job.id %}" class="btn btn-primary">View Job</a>
                         </li>
                     {% endfor %}
                 </ul>

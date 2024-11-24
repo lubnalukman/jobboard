@@ -74,38 +74,46 @@ h1 {
                     <th>Applied Date</th>
                     <th>Resume</th>
                     <th>Cover Letter</th>
-                
                 </tr>
             </thead>
             <tbody>
                 {% for applicant in applicants %}
                     <tr>
-                        <td>{{ applicant.applicant }}</td>
+                        <td>{{ applicant.applicant.name }}</td>
                         <td>{{ applicant.jobs.title }}</td>
                         <td>
                             <form method="post" action="">
                                 {% csrf_token %}
+                                <input type="hidden" name="applicant_id" value="{{ applicant.id }}">
                                 <select name="application_status" class="form-control">
-                                    <option value="Pending" {% if applicant.application_status == "Pending" %}selected{% endif %}>Pending</option>
-                                    <option value="Accepted" {% if applicant.application_status == "Accepted" %}selected{% endif %}>Accepted</option>
-                                    <option value="Rejected" {% if applicant.application_status == "Rejected" %}selected{% endif %}>Rejected</option>
+                                    <option value="applied" {% if applicant.application_status == "applied" %}selected{% endif %}>Applied</option>
+                                    <option value="interview" {% if applicant.application_status == "interview" %}selected{% endif %}>Interview</option>
+                                    <option value="offered" {% if applicant.application_status == "offered" %}selected{% endif %}>Offered</option>
+                                    <option value="rejected" {% if applicant.application_status == "rejected" %}selected{% endif %}>Rejected</option>
                                 </select>
+                                <div class="form-check mt-2">
+                                    <input type="checkbox" name="send_email" value="true" class="form-check-input" id="sendEmail{{ applicant.id }}">
+                                    <label class="form-check-label" for="sendEmail{{ applicant.id }}">Send Email</label>
+                                </div>
+                                <button type="submit" class="btn btn-info btn-sm">Update</button>
+                            </form>
                         </td>
                         <td>{{ applicant.applied_date }}</td>
-                        <td><a href="{{ applicant.resume.url }}" class="btn-submit">View Resume</a></td>
-                        <td><a href="{{ applicant.cover_letter.url }}" class="btn-submit">View Cover Letter</a></td>
+                        <td><a href="{{ applicant.resume.url }}" class="btn btn-info btn-sm">View Resume</a></td>
                         <td>
-                            </form>
-                        </a<>
+                            {% if applicant.cover_letter %}
+                                <a href="{{ applicant.cover_letter.url }}" class="btn btn-info btn-sm">View Cover Letter</a>
+                            {% else %}
+                                <span class="text-muted">No Cover Letter</span>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
-    <!-- Bootstrap JavaScript libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-</html>

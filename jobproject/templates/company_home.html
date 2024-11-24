@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JobPerfects</title>
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/homestyle.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homestyles.css' %}">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,15 +33,13 @@
         <a href="{% url 'companyform' %}" class="nav-item nav-link">REGISTER COMPANY</a>
         <a href="{% url 'postjob' %}" class="nav-item nav-link">POST A JOB</a>
           <a href="{% url 'companyjobs' %}" class="nav-item nav-link">JOBS</a>
-         
-         
           <a href="{% url 'viewapplicants' %}" class="nav-item nav-link">JOB SEEKERS</a>
           <a href="{% url 'companyprofile' %}" class="nav-item nav-link">PROFILE</a>
           <a href="{% url 'Logout' %}" class="nav-item nav-link">LOGOUT</a>
         </div>
         <div class="navbar-nav">
-          <a href="/aboutus" class="nav-item nav-link">About Us</a>
-          <a href="/contactus" class="nav-item nav-link">Contact Us</a>
+          <a href="{% url 'aboutus2' %}" class="nav-item nav-link">About Us</a>
+          <a href="{% url 'contactus2' %}" class="nav-item nav-link">Contact Us</a>
         </div>
       </div>
     </nav>
@@ -65,22 +63,11 @@
                 {% for applicant in matching_applicants %}
                     <li class="list-group-item">
                         <h4>{{ applicant.name }}</h4>
-                        <p><strong>Age:</strong> {{ applicant.age }}</p>
-                        <p><strong>Gender:</strong> {{ applicant.get_gender_display }}</p>
-                        <p><strong>Phone Number:</strong> {{ applicant.phone_number }}</p>
                         <p><strong>Qualification:</strong> {{ applicant.qualification }}</p>
                         <p><strong>Years of Experience:</strong> {{ applicant.year_of_experience }}</p>
                         <p><strong>Location:</strong> {{ form.instance.location }}</p>
                         <p><strong>Job Preferred:</strong> {{ applicant.job_title }}</p>
-                        {% if applicant.resume %}
-                            <p><strong>Resume:</strong> <a href="{{ applicant.resume.url }}" target="_blank">Download</a></p>
-                        {% endif %}
-                        <h5>Do you want to contact {{ applicant.name }}?</h5>
-                    <form action="" method="post" enctype="multipart/form-data" id="mailform">
-                        {% csrf_token %}
-                        <input type="hidden" name="applicant_id" value="{{ applicant.id }}">
-                        <button type="submit" class="btn btn-primary">Send mail</button>
-                    </form>
+                        <a href="{% url 'applicant_details' applicant.id %}" class="btn btn-primary">View Details</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -91,16 +78,11 @@
             {% for applicant in non_matching_applicants %}
                 <li class="list-group-item">
                     <h4>{{ applicant.name }}</h4>
-                    <p><strong>Age:</strong> {{ applicant.age }}</p>
-                    <p><strong>Gender:</strong> {{ applicant.get_gender_display }}</p>
-                    <p><strong>Phone Number:</strong> {{ applicant.phone_number }}</p>
                     <p><strong>Qualification:</strong> {{ applicant.qualification }}</p>
                     <p><strong>Years of Experience:</strong> {{ applicant.year_of_experience }}</p>
                     <p><strong>Location:</strong> {{ applicant.location }}</p>
-                    <p><strong>Job Preferred:</strong> {{ applicant.job_title }}</p>
-                    {% if applicant.resume %}
-                        <p><strong>Resume:</strong> <a href="{{ applicant.resume.url }}" target="_blank">Download</a></p>
-                    {% endif %}
+                    <p><strong>Job Preferred:</strong> {{ applicant.job_title }}</p> 
+                    <a href="{% url 'applicant_details' applicant.id %}" class="btn btn-primary">View Details</a>   
                 </li>
             {% endfor %}
         </ul>

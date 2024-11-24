@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Job Perfects</title>
+    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .navbar-custom {
+    background-color: #1199b7;
+}
+body {
+            background-image: url("{% static 'images/bgimage1.jpg' %}");
+            background-size: cover; /* Make sure the image covers the entire background */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background from repeating */
+            height: 200vh; /* Make sure the background covers the full height of the viewport */
+            color: black; /* Set default text color to white */
+        }
+    </style>
+</head>
+<body>
+    
+        <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
+            <a href="/" class="navbar-brand">JOB PERFECTS</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto"> <!-- Changed ml-auto to mr-auto to align left -->
+                    <li class="nav-item">
+                        <a href="{% url 'companyhome' %}" class="nav-link">HOME</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+    <div class="container">
+        <h1>Welcome to Job Perfects!</h1>
+        <p>Your Perfect Job Awaits!</p>
+        <p>At Job Perfects, we believe in connecting talented individuals with their dream jobs. Whether you are seeking your first job, looking to make a career change, or aiming to climb the corporate ladder, Job Perfects is here to help you every step of the way.</p>
+        <h2>Why Choose Job Perfects?</h2>
+        <ul>
+            <li><strong>Comprehensive Job Listings</strong></li>
+            <p>Thousands of job postings from leading companies across various industries. Regularly updated to ensure you have access to the latest opportunities.</p>
+            <li><strong>Easy-to-Use Interface</strong></li>
+            <p>Intuitive design for both job seekers and employers. Advanced search filters to help you find the perfect match quickly.</p>
+            <li><strong>Personalized Job Recommendations</strong></li>
+            <p>AI-driven algorithms to suggest jobs that fit your skills, experience, and career goals. Save your searches and receive notifications for new job postings.</p>
+            <li><strong>Career Resources and Advice</strong></li>
+            <p>Access to a wealth of resources including resume building tips, interview preparation guides, and career development articles. Webinars and workshops hosted by industry experts.</p>
+            <li><strong>Employer Insights</strong></li>
+            <p>Detailed company profiles to help you learn more about potential employers. Employee reviews and ratings to give you an inside look at company culture and work environment.</p>
+            <li><strong>Secure and Confidential</strong></li>
+            <p>Your privacy is our priority. We ensure that your personal information is protected and only shared with employers with your consent.</p>
+        </ul>
+        <h2>How It Works</h2>
+        <h3>For Job Seekers:</h3>
+        <ul>
+            <li>Create a Profile - Sign up and create a detailed profile highlighting your skills, experience, and career aspirations.</li>
+            <li>Search and Apply - Browse through job listings and apply to positions that interest you.</li>
+            <li>Get Noticed - Employers can find and contact you directly through our platform.</li>
+        </ul>
+        <h3>For Employers:</h3>
+        <ul>
+            <li>Post a Job - Create job listings to attract top talent.</li>
+            <li>Search Resumes - Access our database of qualified candidates.</li>
+            <li>Hire the Best - Manage applications and streamline your hiring process with our easy-to-use tools.</li>
+        </ul>
+        <p class="text-center"><a href="{%url 'sign_up' %}" class="btn btn-primary">Join Job Perfects Today!</a></p>
+        <p>Embark on your journey to career success with Job Perfects. Sign up now to start finding the job that is perfect for you.</p>
+        <p>Back to home page</p> <a href="{% url 'companyhome' %}"></a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JavaScript libraries -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+</body>
+</html>

@@ -9,6 +9,10 @@
     <style>
       .navbar-custom {
         background-color: #1199b7;
+        position: fixed; /* Fix the navbar at the top */
+        top: 0;          /* Position it at the very top */
+        width: 100%;     /* Make the navbar stretch across the page */
+        z-index: 1000;
       }
       .btn-primary {
         background-color: #1199b7;
@@ -18,6 +22,11 @@
         padding: 10px 20px;
         cursor: pointer;
       }
+      html, body {
+    height: 100%; /* Ensure body and html take the full height of the page */
+    margin: 0;
+    padding: 0;
+}
     </style>
   </head>
   <body>
