@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    {% load static %}
+    <title>Job Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/homestyles.css'%}"> </link>
+    <script src="{% static 'js/form.js' %}"></script>
+    <style>
+        .btn-primary {
+    padding: 10px 20px;
+    background-color:  #1199b7;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove default underline */
+    display: inline-block; /* Ensure it's displayed as a block */
+}
+
+.btn-primary:hover {
+    background-color: #1a4b63;
+}
+    </style>
+</head>
+
+<body>
+    {% include 'applnavbar.html' %}
+    <div class="container mt-5">
+        <h1>{{ job.title }}</h1>
+        <p><strong>Company:</strong> {{ job.company_name }}</p>
+        <p><strong>Location:</strong> {{ job.location }}</p>
+        <p><strong>Employment Type:</strong> {{ job.get_employment_type_display }}</p>
+        <p><strong>Date Posted:</strong> {{ job.date_posted }}</p>
+        <p><strong>Application Deadline:</strong> {{ job.application_deadline }}</p>
+        <p><strong>Category:</strong> {{ job.category }}</p>
+        <p><strong>Salary:</strong> {{ job.salary }}</p>
+        <p><strong>Qualification:</strong> {{ job.qualification }}</p>
+        <p><strong>Experience Required (Years):</strong> {{ job.experience_years }}</p>
+        <p><strong>Description:</strong> {{ job.description }}</p>
+        <h4>Do you want to apply?</h4>
+        <form action="{% url 'apply_job' job.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button class="btn btn-primary" type="submit">Upload your CV</button>
+        </form>
+    </div>
+</body>
+</html>    
+   
