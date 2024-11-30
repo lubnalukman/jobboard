@@ -18,7 +18,6 @@ from django.templatetags.static import static
 from django.core.mail.message import EmailMessage
 from django.core.exceptions import ObjectDoesNotExist
 
-
 def index(request):
     return render(request,'index.html')
 
@@ -84,7 +83,6 @@ def signup_view(request):
     return render(request, 'sign_up.html')
 
 def applicant_home(request):
-    
     user = request.user
     try:
         applicant = Applicant.objects.get(user=user)
@@ -130,9 +128,10 @@ def company_home(request):
         applicant_id = request.POST.get('applicant_id')
         applicant = Applicant.objects.get(id=applicant_id)
         
+        
         send_mail(
             'Job Opportunity',
-            f'Hi {applicant.name},\n\nWe are interested in your profile for the {applicant.job_title} position at {company.name}. Please we will contact u for further discussion.\n\nBest regards,\nYour Company',
+            f'Hi {applicant.name},\n\nWe are interested in your profile for the {applicant.job_title} position at {company.name}. Please contact us for further discussion.\n\nBest regards,\nYour Company',
             settings.DEFAULT_FROM_EMAIL,
             [applicant.user.email],
             fail_silently=False,
@@ -143,7 +142,6 @@ def company_home(request):
 def applicant_details(request, id):
     applicant = get_object_or_404(Applicant, id=id)
     return render(request, 'applicantdetails.html', {'applicant': applicant})
-
 
 def applicant_form_view(request):
     already_submitted = Applicant.objects.filter(user=request.user).exists()
@@ -378,11 +376,9 @@ def view_applicants(request):
     applicants = ApplicantTracking.objects.filter(company=company)
     return render(request, 'view_applicants.html', {'company': company, 'applicants': applicants})
 
-
 def companies_with_jobs(request):
     companies = Company.objects.all()
     companies_jobs = []
-
     for company in companies:
         jobs = Job.objects.filter(company_name=company)
         companies_jobs.append({
@@ -455,26 +451,6 @@ def errorcomp_view(request):
 def errorappl_view(request):
     return render(request,'error_appl.html')
 
-def resetPassword(request):
-    if request.method == "POST":
-        uname = request.POST.get('uname')
-        newpwd = request.POST.get('password')
-        
-        if uname and newpwd:
-            try:
-                user = User.objects.get(username=uname)
-                user.set_password(newpwd)
-                user.save()
-                return render(request, "ResetPassword.html", {"errmsg": "Password reset successfully"})
-            except User.DoesNotExist:
-                return render(request, "ResetPassword.html", {"errmsg": "User does not exist"})
-            except Exception as e:
-                print(e)
-                return render(request, "ResetPassword.html", {"errmsg": "Password reset failed"})
-        else:
-            return render(request, "ResetPassword.html", {"errmsg": "Please provide both username and password"})
-    return render(request, "ResetPassword.html")
-
 def aboutus_view1(request):
     return render(request,'aboutus1.html')
 
@@ -497,6 +473,26 @@ def contactus_view1(request):
         else:
             return render(request, 'contactus1.html', {'form': sub, 'success': False})
     return render(request, 'contactus1.html', {'form': sub})
+
+def resetPassword(request):
+    if request.method == "POST":
+        uname = request.POST.get('uname')
+        newpwd = request.POST.get('password')
+        
+        if uname and newpwd:
+            try:
+                user = User.objects.get(username=uname)
+                user.set_password(newpwd)
+                user.save()
+                return render(request, "ResetPassword.html", {"errmsg": "Password reset successfully"})
+            except User.DoesNotExist:
+                return render(request, "ResetPassword.html", {"errmsg": "User does not exist"})
+            except Exception as e:
+                print(e)
+                return render(request, "ResetPassword.html", {"errmsg": "Password reset failed"})
+        else:
+            return render(request, "ResetPassword.html", {"errmsg": "Please provide both username and password"})
+    return render(request, "ResetPassword.html")
 
 def aboutus_view2(request):
     return render(request,'aboutus2.html')
