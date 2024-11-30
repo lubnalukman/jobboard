@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Applicants</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/homestyles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #1199b7;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.table thead th {
+    background-color: #1199b7;
+    color: #ffffff;
+    text-align: center;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.form-control {
+    width: auto;
+    display: inline-block;
+}
+
+.btn-submit {
+    background-color: #1199b7;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0a6d91;
+}
+
+
+    </style>
+</head>
+<body>
+    {% include "adminnavbar.html" %}
+    
+    <div class="container mt-5">
+      <h1>Applicants</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Phone Number</th>
+                    <th>Qualification</th>
+                    <th>Job title</th>
+                    <th>Location</th>
+                    <th>Resume</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for applicant in applicants %}
+                    <tr>
+                        <td>{{ applicant.name }}</td>
+                        <td>{{ applicant.age }}</td>
+                        <td>{{ applicant.get_gender_display  }}</td>
+                        <td>{{ applicant.phone_number }}</td>
+                        <td>{{ applicant.qualification }}</td>
+                        <td>{{ applicant.job_title }}</td>
+                        <td>{{ applicant.location }}</td>
+                        <td>{{ applicant.applied_date }}</td>
+                        <td><a href="{{ applicant.resume.url }}" class="btn btn-info btn-sm">View Resume</a></td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>

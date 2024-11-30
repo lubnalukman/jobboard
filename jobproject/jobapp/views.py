@@ -29,7 +29,7 @@ def applicantlogin_view(request):
         if user is not None:
             if user.is_superuser:
                 login(request, user)
-                return redirect('/admin/')  
+                return redirect('adminhome')  
             else:
                 login(request, user)
                 return redirect('applicanthome')  
@@ -46,7 +46,7 @@ def companylogin_view(request):
         if user is not None:
             if user.is_superuser:
                 login(request, user)
-                return redirect('/admin/')  
+                return redirect('adminhome')  
             else:
                 login(request, user)
                 return redirect('companyhome') 
@@ -81,6 +81,25 @@ def signup_view(request):
         return redirect('index')
 
     return render(request, 'sign_up.html')
+
+def admin_home(request):
+    user=request.user
+    if user.is_superuser:
+        jobs=Job.objects.all()
+        return render(request,'admin_home.html',{'jobs':jobs})
+    
+def admin_applicantsview(request):
+    applicants = Applicant.objects.all()
+    return render(request, 'adminapplicants.html', {'applicants': applicants})
+
+def admin_companiesview(request):
+    companies = Company.objects.all()
+    return render(request, 'admincompanies.html', {'companies': companies})
+
+def admin_usersview(request):
+    users = User.objects.all()
+    return render(request, 'allusers.html', {'users': users})
+
 
 def applicant_home(request):
     user = request.user

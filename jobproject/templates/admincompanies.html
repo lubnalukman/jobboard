@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Companies</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/homestyles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.navbar-custom {
+    background-color: #1199b7;
+    position: fixed; 
+    top: 0;          /* Position it at the very top */
+        width: 100%;     /* Make the navbar stretch across the page */
+        z-index: 1000;
+}
+.container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #1199b7;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.table thead th {
+    background-color: #1199b7;
+    color: #ffffff;
+    text-align: center;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.form-control {
+    width: auto;
+    display: inline-block;
+}
+
+.btn-submit {
+    background-color: #1199b7;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0a6d91;
+}
+
+
+    </style>
+</head>
+<body>
+    {% include "adminnavbar.html" %}
+    
+    <div class="container mt-5">
+        <h1>Companies</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Information</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Website</th>
+                    <th>Type of Company</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for company in companies %}
+                    <tr>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.info }}</td>
+                        <td>{{ company.email }}</td>
+                        <td>{{ company.location }}</td>
+                        <td>{{ company.website }}</td>
+                        <td>{{ company.type }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>

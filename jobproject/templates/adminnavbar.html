@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobPerfects</title>
+    <style>
+        .btn.btn-primary {
+    background-color: #1199b7;
+    border-color: #1199b7;
+    }
+    </style>
+    
+    <link rel="stylesheet" href="{% static 'css/homestyles.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="bs-example">
+        <div class="navbar navbar-expand-md navbar-dark navbar-custom">
+            <a href="/" class="navbar-brand">JOB PERFECTS</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="{% url 'adminhome' %}" class="nav-item nav-link">HOME</a>
+                    <a href="{% url 'adminapplicants' %}" class="nav-item nav-link">APPLICANTS</a>
+                    <a href="{% url 'admincompanies' %}" class="nav-item nav-link">COMPANIES</a>
+                    <a href="{% url 'allusers' %}" class="nav-item nav-link">USERS</a>
+                    <a href="{% url 'Logout' %}" class="nav-item nav-link">LOGOUT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    </body>
+</html>    
+        
+           
