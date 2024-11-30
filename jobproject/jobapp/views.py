@@ -217,7 +217,7 @@ def post_job_view(request):
         if form.is_valid():
             job = form.save(commit=False)
             job.creator = request.user  
-            job.company = company.first()  
+            job.company_name = company.first()  
             job.save()
             send_job_notifications(job.id)  
             return redirect('companyhome')  
