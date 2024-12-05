@@ -19,7 +19,7 @@
         text-decoration: none;
     }
     body {
-            background-image: url("{% static 'images/bgimage1.jpg' %}");
+            background-image: url("{% static 'images/bgimage.jpg' %}");
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat; 
@@ -29,20 +29,7 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
-        <a href="/" class="navbar-brand">JOB PERFECTS</a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto"> 
-                <li class="nav-item">
-                    <a href="{% url 'companyhome' %}" class="nav-link">HOME</a>
-                </li>
-                
-            </ul>
-        </div>
-    </nav>
+    {% include "compnavbar.html" %}
     <div class="container mt-5">
         <h2>Contact Us</h2>
         <form method="post" id="Form">

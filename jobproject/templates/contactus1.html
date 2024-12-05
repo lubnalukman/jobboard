@@ -17,23 +17,18 @@
         border-radius: 5px;
         text-decoration: none;
     }
+    body {
+            background-image: url("{% static 'images/bgimage.jpg' %}");
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            height: 100vh; 
+            color: white; 
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
-        <a href="/" class="navbar-brand">JOB PERFECTS</a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto"> <!-- Changed ml-auto to mr-auto to align left -->
-                <li class="nav-item">
-                    <a href="{% url 'applicanthome' %}" class="nav-link">HOME</a>
-                </li>
-                
-            </ul>
-        </div>
-    </nav>
+   {% include "applnavbar.html" %}
     <div class="container mt-5">
         <h2>Contact Us</h2>
         <form method="post" id="Form">
