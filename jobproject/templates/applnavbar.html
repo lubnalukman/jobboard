@@ -17,20 +17,31 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-md navbar-dark navbar-custom">
-    <a href="/" class="navbar-brand">JOB PERFECTS</a>
-    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto"> <!-- Changed ml-auto to mr-auto to align left -->
-            <li class="nav-item">
+  <div class="bs-example">
+    <div class="navbar navbar-expand-md navbar-dark navbar-custom">
+        <a href="/" class="navbar-brand">JOB PERFECTS</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav">
                 <a href="{% url 'applicanthome' %}" class="nav-link">HOME</a>
-            </li>
-            
-        </ul>
+                <a href="{% url 'applicantform' %}" class="nav-item nav-link">REGISTRATION</a>
+                <a href="{% url 'applicantprofile' %}" class="nav-item nav-link">PROFILE</a>
+                <a href="{% url 'companiesjobs' %}" class="nav-item nav-link">COMPANIES</a>
+                <a href="{% url 'appliedjobs' %}" class="nav-item nav-link">JOBS</a>
+                <a href="{% url 'Logout' %}" class="nav-item nav-link">LOGOUT</a>
+            </div>
+            <div class="navbar-nav">
+                <a href="{% url 'aboutus1' %}" class="nav-item nav-link">About Us</a>
+                <a href="{% url 'contactus1' %}" class="nav-item nav-link">Contact Us</a>
+            </div>
+        </div>
     </div>
-</nav>
+</div> 
+
+
+
   <!-- Bootstrap JavaScript libraries -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

@@ -17,20 +17,29 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-md navbar-dark navbar-custom">
-    <a href="/" class="navbar-brand">JOB PERFECTS</a>
-    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+  <div class="bs-example">
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom" >
+      <a href="/" class="navbar-brand">JOB PERFECTS</a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto"> <!-- Changed ml-auto to mr-auto to align left -->
-            <li class="nav-item">
-                <a href="{% url 'companyhome' %}" class="nav-link">HOME</a>
-            </li>
-            
-        </ul>
-    </div>
-</nav>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav">
+          <a href="{% url 'companyhome' %}" class="nav-link">HOME</a> 
+          <a href="{% url 'companyform' %}" class="nav-item nav-link">REGISTER COMPANY</a>
+          <a href="{% url 'postjob' %}" class="nav-item nav-link">POST A JOB</a>
+          <a href="{% url 'companyjobs' %}" class="nav-item nav-link">JOBS</a>
+          <a href="{% url 'viewapplicants' %}" class="nav-item nav-link">JOB SEEKERS</a>
+          <a href="{% url 'companyprofile' %}" class="nav-item nav-link">PROFILE</a>
+          <a href="{% url 'Logout' %}" class="nav-item nav-link">LOGOUT</a>
+        </div>
+        <div class="navbar-nav">
+          <a href="{% url 'aboutus2' %}" class="nav-item nav-link">About Us</a>
+          <a href="{% url 'contactus2' %}" class="nav-item nav-link">Contact Us</a>
+        </div>
+      </div>
+    </nav>
+  </div>
   <!-- Bootstrap JavaScript libraries -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

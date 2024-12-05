@@ -143,7 +143,7 @@ def company_home(request):
         try:
             company = Company.objects.get(user=request.user)
         except Company.DoesNotExist:
-            return redirect('companyform')  
+            return redirect('errorcomp')  
         applicant_id = request.POST.get('applicant_id')
         applicant = Applicant.objects.get(id=applicant_id)
         
@@ -281,7 +281,7 @@ def applyjob_view(request, job_id):
     try:
         applicant = Applicant.objects.get(user=applicant_user)
     except Applicant.DoesNotExist:
-        return redirect('applicantform')  
+        return redirect('errorappl')  
 
     if request.method == 'POST':
         form = ApplicantTrackingForm(request.POST, request.FILES)
@@ -377,7 +377,7 @@ def view_applicants(request):
                     f"New Status: {new_status}\n\n"
                     f"Thank you for applying with us.\n\n"
                     f"more details will be send later"
-                    f"Best regards,\n{company.name} Team"
+                    f"Best regards, \n{company.name} Team"
                    
                 )
                 from_email = "demoidlubi@gmail.com"

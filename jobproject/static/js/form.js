@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function()
 {
    document.getElementById('Form').addEventListener('submit', function(event) {
-       alert('Application submitted successfully');
+       alert('User Registered successfully');
    });
 });
 
