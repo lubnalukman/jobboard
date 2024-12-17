@@ -26,7 +26,7 @@
                 Qualification: {{ job.qualification }}<br>
                 Experience Required: {{ job.experience_years }} years
             
-                <form action="{% url 'applyjob' %}" method="post" id="Form" enctype="multipart/form-data">
+                <form action="{% url 'apply_job' %}" method="post" id="Form" enctype="multipart/form-data">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-primary">Apply</button>
                 </form>
