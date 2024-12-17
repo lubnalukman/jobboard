@@ -1,162 +1,118 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Perfects index Page</title>
-    <!-- Include Bootstrap CSS -->
+    <title>Job Perfects Index Page</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <script src="{% static 'js/index.js' %}"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  
+    
     <style>
-      .navbar {
+        /* Navbar Styling */
+        .navbar {
             background-color: #1199b7;
-            position: fixed;  /* Fixes the navbar at the top */
-            top: 0;           /* Positions it at the top of the page */
-            left: 0;          /* Align it to the left edge */
-            width: 100%;      /* Make the navbar full width */
-            color: white;     /* White text */
-            padding: 10px 20px; /* Spacing inside navbar */
-            z-index: 1000;    /* Ensure it's above other content */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
         }
 
+        /* Body Styling */
         body {
             background-image: url("{% static 'images/bgimage.jpg' %}");
-            background-size: cover; /* Make sure the image covers the entire background */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Prevent the background from repeating */
-            height: 140vh; /* Make sure the background covers the full height of the viewport */
-            color: white; /* Set default text color to white */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh; /* Full viewport height */
+            color: white;
         }
+
+        /* Centered Content */
         .centered-form {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 80vh;
-            margin-top: 1%;
-            color: white;
+            margin-top: 60px; /* Offset for fixed navbar */
         }
 
-        .search-form {
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            margin: 20px 0;
-        }
-
-        .search-form input[type="search"] {
-            flex: 1;
-            margin-right: 10px;
-        }
-
+        /* Card Styling */
         .main-content {
             display: flex;
+            flex-wrap: wrap; /* Makes cards stack on small screens */
             justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            color: white;
+            margin-top: 30px;
         }
 
         .main-content .card {
-            width: 300px; /* Increased width */
-            height: 200px; /* Increased height */
+            width: 300px;
+            height: 200px;
             text-align: center;
-            margin: 0 20px;
+            margin: 10px;
             background-color: #1199b7;
-            color: #ddd;
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: transform 0.3s ease; /* Add transition for hover effect */
+            transition: transform 0.3s ease;
         }
 
         .main-content .card:hover {
-            transform: scale(1.05); /* Increase size on hover */
+            transform: scale(1.05);
         }
 
         .main-content .card a {
-            display: flex;
+            display: block;
             width: 100%;
             height: 100%;
-            padding: 20px;
-            justify-content: center;
-            align-items: center;
             text-decoration: none;
             color: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .main-content .card a:hover {
-            background-color: #14515e; /* Change background color on hover */
-        }
-
-        .container {
-            color: white;
             padding: 20px;
-            margin-top: 2%;
-            width: 100%; /* Full width */
-            max-width: 100%; /* Ensures no overflow */
-            height: 375px; /* Adjust height based on content */
-            box-sizing: border-box; /* Includes padding in width */
-            margin-bottom: 15px;
         }
 
-        .btn-primary {
-            background-color: #1199b7;
+        /* Responsive Fix */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .main-content .card {
+                width: 90%; /* Adjust card width */
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark">
         <a href="/" class="navbar-brand">JOB PERFECTS</a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="{% url 'aboutus' %}" class="nav-link">About Us</a>
+            </div>
+        </div>
     </nav>
 
+    <!-- Centered Content -->
     <div class="centered-form">
         <div class="main-content">
             <div class="card">
-                <a href="{% url 'applicantlogin' %}">
-                    ARE YOU A JOB SEEKER
-                </a>
+                <a href="{% url 'applicantlogin' %}">ARE YOU A JOB SEEKER</a>
             </div>
             <div class="card">
-                <a href="{% url 'companylogin' %}">
-                    ARE YOU AN EMPLOYER
-                </a>
+                <a href="{% url 'companylogin' %}">ARE YOU AN EMPLOYER</a>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <h5>About us</h5>
-        <p>Welcome to Job Perfects!
-            Your Perfect Job Awaits!
-            
-            At Job Perfects, we believe in connecting talented individuals with their dream jobs. Whether you are seeking your first job, looking to make a career change, or aiming to climb the corporate ladder, Job Perfects is here to help you every step of the way.</p>
-        <p> How It Works</p><br>
-            <p>For Job Seekers:
-            
-                Create a Profile - Sign up and create a detailed profile highlighting your skills, experience, and career aspirations.
-                Search and Apply - Browse through job listings and apply to positions that interest you.
-                Get Noticed - Employers can find and contact you directly through our platform.</p><br>
-            
-            <p> For Employers:
-            
-                Post a Job - Create job listings to attract top talent.
-                Search Resumes - Access our database of qualified candidates.
-                Hire the Best - Manage applications and streamline your hiring process with our easy-to-use tools.</p>
-                <p>For more information about us please login and see aboutus in the navbar</p>
-    </div>
-
-    <!-- Bootstrap JavaScript libraries -->
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

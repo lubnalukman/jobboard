@@ -40,6 +40,7 @@ urlpatterns = [
     path('searchapplicants', views.search_applicants, name='searchapplicants'),
     path('errorcomp',views.errorcomp_view,name='errorcomp'),
     path('errorappl',views.errorappl_view,name='errorappl'),
+    path('aboutus', views.aboutus, name='aboutus'),
     path('aboutus1', views.aboutus_view1, name='aboutus1'),
     path('contactus1/', views.contactus_view1, name='contactus1'),
     path('aboutus2', views.aboutus_view2, name='aboutus2'),

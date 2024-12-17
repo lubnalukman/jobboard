@@ -470,6 +470,9 @@ def errorcomp_view(request):
 def errorappl_view(request):
     return render(request,'error_appl.html')
 
+def aboutus(request):
+    return render(request,'aboutus.html')
+
 def aboutus_view1(request):
     return render(request,'aboutus1.html')
 

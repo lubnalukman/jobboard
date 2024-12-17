@@ -48,7 +48,7 @@
         <h4>Do you want to apply?</h4>
         <form action="{% url 'apply_job' job.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <button class="btn btn-primary" type="submit">Upload your CV</button>
+            <button class="btn btn-primary" type="submit">Apply</button>
         </form>
     </div>
 </body>
